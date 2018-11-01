@@ -12,8 +12,7 @@ public class App {
 	}
 	
 	@Bean
-	public int bean() {
-		return 1;
+	public void bean() {
 	}
 
 }
