@@ -23,7 +23,7 @@ public class Controlador {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(Controlador.class);
 	
-	@CrossOrigin(origins = "http://localhost:80")
+	@CrossOrigin
 	@RequestMapping(method=RequestMethod.POST, path="/covertInvoice")
 	public Map<String, Integer> controladorPost(@RequestBody InputDTO dto) {	
 		LOG.info("Ejecutantdo proceso con la imagen");
