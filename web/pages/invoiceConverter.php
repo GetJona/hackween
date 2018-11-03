@@ -1,39 +1,71 @@
 <?php
 
+error_reporting(E_ALL);
 header('Content-Type: text/html; charset=utf-8');
 
 use thiagoalessio\TesseractOCR\TesseractOCR;
-include('../../vendor/autoload.php');
-include('HandleData.php');
+include_once('../../vendor/autoload.php');
+include_once('HandleData.php');
+include_once('../entities/InvoiceRaw.php');
+
+
+
+$imgPath = $_POST['data'];
+$validImages=['jpg','jpeg', 'gif', 'bmp', 'png'];
+
+if($imgPath=="" || empty($imgPath) ){
+    header($_SERVER['SERVER_PROTOCOL'] . ' Elija una imagen valida', true, 406);
+    exit();
+}
+
+
+$falseQuantity=0;
+foreach ($validImages as $index => $type){
+    if(stripos($imgPath, $type)===false){
+        $falseQuantity++;
+    }
+}
+
+
+
+if($falseQuantity >= count($validImages)){
+    header($_SERVER['SERVER_PROTOCOL'] . ' Elija una imagen valida', true, 406);
+    exit();
+}
+
+$fileImage = generateImage($imgPath);
 
 $obj = new TesseractOCR();
-
-$imgPath = generateImage($_POST['data']);
-$obj->image($imgPath);
+$obj->image($fileImage);
 $obj->lang('spa', 'eng');
-
 $obj->whitelist('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,$:/_-');
 $out_text = $obj->run();
-$out_text = preg_replace("/(\n\n | \n\n)/","",$out_text);
-
 
 $handle = new HandleData();
+
+
+/*
+//var_dump($out_text);
+echo($handle->getNitSeller($out_text));
+die();
+echo('<pre>');
+echo($out_text);
+echo('</pre>');
+die();
+
+*/
+
+$out_text = preg_replace("/(\n\n | \n\n)/","",$out_text);
+$raw = new InvoiceRaw();
+$raw->setData( date('Y/m/d h:i:s', time()), $_SERVER['REMOTE_ADDR'], $out_text, $fileImage);
+$raw->insertData();
+
+
 $handle->handleTypes($out_text);
-$handle->public;
 
 
 echo(trim(json_encode($handle->public)));
 
-
-function separeBase64($base64){
-    $image_parts = explode(";base64,", $base64);
-    $image_type_aux = explode("image/", $image_parts[0]);
-    $image_type = $image_type_aux[1];
-    if($image_type=='jpeg'){
-        $image_type='jpg';
-    }
-    return [$image_parts[1],$image_type];
-}
 
 function generateImage($base64){
 
