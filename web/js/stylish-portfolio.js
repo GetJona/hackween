@@ -1,49 +1,5 @@
-window.url={};
-window.url.sendInvoice = 'http://localhost:8080/convertInvoice';
-
 (function($) {
   "use strict"; // Start of use strict
-
-  // Smooth scrolling using jQuery easing
-  $('a.js-scroll-trigger[href*="#"]:not([href="#"])').click(function() {
-        if(this.files && this.files[0]){
-            sendInvoice(getBase64(this.files[0]));
-        }
-  });
-
-function getBase64(file) {
-    var reader = new FileReader();
-    reader.readAsDataURL(file);
-
-    reader.onerror = function (error) {
-        alert('No fue posible leer su factura');
-    };
-
-    reader.onload = function () {
-        //console.log(reader.result);
-        sendInvoice(reader.result);
-    };
-}
-
-function sendInvoice($base64) {
-
-    $.ajax({
-        url:window.url.sendInvoice,
-        method:'POST',
-        headers:{"Content-Type":"application/json"},
-        data:{
-            name:'invoice.png',
-            data:$base64
-        },
-        dataType : 'json',
-        success:function(data){
-            var image = new Image();
-            image.src = data;
-            document.body.appendChild(image);
-        }
-    });
-
-}
 
   // Scroll to top button appear
   $(document).scroll(function() {

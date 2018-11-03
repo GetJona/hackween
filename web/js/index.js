@@ -1,5 +1,5 @@
 window.url={};
-window.url.sendInvoice = 'invoiceConverter.php';
+window.url.sendInvoice = 'pages/invoiceConverter.php';
 
 $(document).ready(function(){
     $("#fullFileUpload").on('change',function(ev){
