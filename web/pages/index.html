@@ -4,8 +4,6 @@
         <meta charset="UTF-8">
         <title>Bienvenido!</title>
         <link rel="stylesheet" href="../css/bootstrap/css/bootstrap.min.css" type="text/css" />
-        <link rel="stylesheet" href="../css/bootstrap/css/bootstrap-grid.css.map" type="text/css" />
-        <link rel="stylesheet" href="../css/bootstrap/css/bootstrap-reboot.min.css" type="text/css" />
         <link rel="stylesheet" href="../css/general.css" type="text/css" />
     </head>
     <body>
@@ -17,14 +15,12 @@
             <div>
                 <h3>Digitaliza tu factura</h3>
             </div>
-            <div id="doubleCenter">
-                <div>
-                    <label>Usuario</label>
-                    <input type="text" />
+            <div id="uploadInvoice">
+                <div class="backgroundFileUpload">
+                    <img src="#"/>
                 </div>
-                <div>
-                    <label>Contraseña</label>
-                    <input type="text" />
+                <div class="overLayer">
+                    <input id="fullFileUpload" type="file" />
                 </div>
             </div>
         </div>
@@ -32,6 +28,6 @@
         <script src="../js/jquery/jquery.js"></script>
         <script src="../css/bootstrap/js/bootstrap.min.js"></script>
         <script src="../css/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+        <script src="../js/pages/index.js"></script>
     </body>
 </html>
