@@ -1,0 +1,13 @@
+
+
+#container{
+    position: absolute;
+    width:100%;
+    height:100%;
+    text-align: center;
+}
+
+#doubleCenter{
+    width: 400px;
+    height: 400px;
+}
