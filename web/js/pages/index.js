@@ -1,5 +1,5 @@
 window.url={};
-window.url.sendInvoice = 'localhost:8080/convertInvoice';
+window.url.sendInvoice = 'http://localhost:8080/convertInvoice';
 
 $(document).ready(function(){
     $("#fullFileUpload").on('change',function(ev){
@@ -19,7 +19,7 @@ function getBase64(file) {
     };
 
     reader.onload = function () {
-        console.log(reader.result);
+        //console.log(reader.result);
         sendInvoice(reader.result);
     };
 }
@@ -32,6 +32,12 @@ function sendInvoice($base64) {
         data:{
             name:'invoice',
             data:$base64
+        },
+        contentType:'application/json; charset=utf-8',
+        headers: {
+            'Access-Control-Allow-Headers':'*',
+            'Access-Control-Allow-Origin':'*',
+            'Access-Control-Allow-Methods': 'POST, GET, OPTIONS'
         },
         success:function(data){
             var image = new Image();
