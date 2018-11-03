@@ -19,7 +19,7 @@
     <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/stylish-portfolio.min.css" rel="stylesheet">
+    <link href="css/stylish-portfolio.css" rel="stylesheet">
 
   </head>
 
@@ -27,7 +27,7 @@
 
     <!-- Header -->
     <header class="masthead d-flex">
-      <div class="container text-center my-auto">
+      <div class="container text-center my-auto" id="first" style="display:;">
         <h1 class="mb-1">Digitalizador de facturas</h1>
         <h3 class="mb-5">
           <em>Pasa tus facturas a formato digital</em>
@@ -35,6 +35,17 @@
         <!--<a class="btn btn-primary btn-xl js-scroll-trigger" href="#about" id="fullFileUpload">Click Para escanear tu factura</a>-->
          <input id="fullFileUpload" type="file" class="btn btn-primary btn-xl js-scroll-trigger"/>
       </div>
+
+      <div class="container text-center my-auto" id="second" style="display:none;">
+        <h1 class="mb-1">Digitalizador de facturas</h1>
+        <h3 class="mb-5">
+          <em>Aqui esta tu factura</em>
+        </h3>
+        <div id="factura">
+          
+        </div>
+      </div>
+
       <div class="overlay"></div>
     </header>
 

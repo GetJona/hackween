@@ -34,12 +34,20 @@ function sendInvoice($base64) {
         },
         success:function(data){
             console.log(data);
-            return;
 
             var image = new Image();
             image.src = data;
 
             document.body.appendChild(image);
+
+            div = document.getElementById('second');
+            div.style.display = '';
+
+            div = document.getElementById('first');
+            div.style.display = 'none';
+
+            div =document.getElementById("factura");
+            div.innerHTML ="<pre>" +data+"</pre>";
         }
     });
 
