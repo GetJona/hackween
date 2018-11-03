@@ -21,7 +21,6 @@ $handle = new HandleData();
 $handle->handleTypes($out_text);
 $handle->public;
 
-var_dump($handle->public);
 
 echo(trim(json_encode($handle->public)));
 
