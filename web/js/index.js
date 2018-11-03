@@ -28,6 +28,7 @@ function sendInvoice($base64) {
     $.ajax({
         url:window.url.sendInvoice,
         method:'POST',
+        dataType: "json",
         data:{
             'name':'invoice',
             'data':$base64
@@ -46,8 +47,25 @@ function sendInvoice($base64) {
             div = document.getElementById('first');
             div.style.display = 'none';
 
+            div = document.getElementById('footer');
+            div.style.display = 'none';
+
+            x = data;
+            var s='';
             div =document.getElementById("factura");
-            div.innerHTML ="<pre>" +data+"</pre>";
+            for(var j=0;j<x.length;j++) {
+                console.log(x[j])
+                if (x[j].type==1) {
+                    s = s + "<br>" + x[j].name+" "+x[j].value
+                }else{
+                    if (x[j].value == '') {
+                        s = s + "<br>" + "-----------------------------------------"
+                    }else{
+                        s = s + "<br>" + x[j].value
+                    }
+                }
+            }
+            div.innerHTML ="<pre>" +s+"</pre>";
         }
     });
 
